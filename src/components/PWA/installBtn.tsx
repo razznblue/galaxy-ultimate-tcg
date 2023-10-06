@@ -27,9 +27,13 @@ const InstallPWA = ({text}) => {
     return null;
   }
   return (
-    <button className="w-48 text-xl font-bold uppercase rounded-full py-2 px-8 max-w-[300px] text-azul border border-azul" onClick={handleInstall}>
-        <h6 className="">{text}</h6>
-    </button>
+    <h6 style={{
+      color: '#FFF',
+      cursor: 'pointer',
+      margin: '-3%',
+      fontSize: 'max(1.2vw, 20px)',
+      textDecoration: 'underline'
+    }} className="" onClick={handleInstall}>{text} &#8594;</h6>
   );
 };
 
