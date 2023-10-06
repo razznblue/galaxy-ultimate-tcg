@@ -1,7 +1,29 @@
 import Image from "next/image";
-import { CSSProperties } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 
 const LittleButton: any = ({ imageDirection, text, onClick }) => {
+  const [windowWidth, setWindowWidth] = useState(null);
+  const [windowHeight, setWindowHeight] = useState(null);
+
+  useEffect(() => {
+    // Function to update window width
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+    }
+
+    // Initial call to set window width
+    handleResize();
+
+    // Add event listener to listen for changes in window size
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   imageDirection = imageDirection || 'left';
   text = text || 'back';
 
@@ -17,13 +39,14 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
     zIndex: '1',
     marginTop: '6%',
     position: 'absolute',
-    bottom: '2%',
+    bottom: windowWidth < 900 && windowHeight > 500 ? '5%' : '2%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
   }
 
   const imgContainer: CSSProperties = {
     width: '20%',
+    minWidth: '30px',
     height: 'auto',
     display: 'flex',
     alignItems: 'center',

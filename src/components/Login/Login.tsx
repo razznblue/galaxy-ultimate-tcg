@@ -22,7 +22,7 @@ const imgContainerStyles: CSSProperties = {
 const hStyles: CSSProperties = {
   color: '#FFF',
   textAlign: 'center',
-  fontSize: 'max(6.5vw, 30px)',
+  fontSize: 'max(6.5vw, 55px)',
   margin: '0',
   padding: '0'
 }
@@ -46,7 +46,7 @@ const Login = ({onClick}) => {
         <h2 style={h2Styles}>ULTIMATE TCG</h2>
         <InstallPWA text={'Install'} placement={'default'}/>
       </div>
-      <LittleButton text="Sign In" imageDirection="right" onClick={onClick} />
+      <LittleButton text="Login" imageDirection="right" onClick={onClick} />
     </MainContainer>
   );
 };
