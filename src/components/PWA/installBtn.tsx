@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const InstallPWA = ({text, placement}) => {
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] = useState(null);
+  const {windowWidth, windowHeight} = useWindowDimensions()
 
   useEffect(() => {
     const handler = (e: { preventDefault: () => void; }) => {
@@ -22,16 +24,16 @@ const InstallPWA = ({text, placement}) => {
       return;
     }
     promptInstall.prompt();
-  };
-
-  if (!supportsPWA) {
+  }; 
+  if (!supportsPWA && process.env.NODE_ENV === 'production') {
+    console.warn('Hiding install button because PWA is not supported on this device');
     return null;
   }
   return (
     <h6 style={{
       position: 'absolute',
       bottom: '20%',
-      right: '5%',
+      right: windowWidth < 900 && windowHeight > 500 ? '' : '5%',
       color: '#FFF',
       cursor: 'pointer',
       margin: '-3%',

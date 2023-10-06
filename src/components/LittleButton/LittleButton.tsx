@@ -1,28 +1,9 @@
 import Image from "next/image";
 import { useState, useEffect, CSSProperties } from "react";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const LittleButton: any = ({ imageDirection, text, onClick }) => {
-  const [windowWidth, setWindowWidth] = useState(null);
-  const [windowHeight, setWindowHeight] = useState(null);
-
-  useEffect(() => {
-    // Function to update window width
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    }
-
-    // Initial call to set window width
-    handleResize();
-
-    // Add event listener to listen for changes in window size
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-  }, []);
+  const {windowWidth, windowHeight} = useWindowDimensions();
 
   imageDirection = imageDirection || 'left';
   text = text || 'back';
