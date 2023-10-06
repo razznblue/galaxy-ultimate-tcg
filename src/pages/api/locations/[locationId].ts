@@ -2,9 +2,16 @@ import { LocationModel } from "../../../server/db/models";
 import LOGGER from "../../../util/logger";
 import { throw404, handleUnexpectedError } from "../../../helpers/apiHelper";
 import dbConnect from "../../../server/db/db";
+import { authorizeSession } from "../../../helpers/apiHelper";
+import path from "path";
+import { NextApiRequest, NextApiResponse } from "next";
 const ObjectId = require('mongoose').Types.ObjectId;
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const sessionAuth = await authorizeSession(req, res, path.basename(__filename));
+  if (sessionAuth?.status !== 200) {
+    return res.status(sessionAuth.status).send(sessionAuth?.msg);
+  }
   await dbConnect();
   const record = 'location';
 
@@ -49,6 +56,13 @@ export default async function handler(req: any, res: any) {
 
     /* UPDATE Location by ID */
     if (req.method === 'PATCH') {
+      if (sessionAuth?.user?.role !== 'admin' && process.env.NODE_ENV === 'production') {
+        return res.status(403).send('Forbidden Request');
+      }
+      if (!req?.query?.username) return res.status(400).send({ status: 400, msg: 'A username parameter is needed on this request' })
+
+      // const isAdmin = userIsAdmin(req?.query?.username);
+
       if (!ObjectId.isValid(id)) { return res.status(400).send(`Invalid ObjectID`) };
       try {
         const record = await LocationModel.findById(id).exec();
@@ -72,6 +86,9 @@ export default async function handler(req: any, res: any) {
 
     /* DELETE by ID */
     if (req.method === 'DELETE' && id) {
+      if (sessionAuth?.user?.role !== 'admin' && process.env.NODE_ENV === 'production') {
+        return res.status(403).send('Forbidden Request');
+      }
       try {
         /* Delete Info */
         const record = await LocationModel.findByIdAndDelete(id);
