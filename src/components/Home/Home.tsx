@@ -4,12 +4,11 @@ import MainContainer from "../MainContainer/MainContiner";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import Currency from "../Currency/Currency";
 import Button from "../Button/Button";
-import Link from "next/link";
 import LittleButton from "../LittleButton/LittleButton";
 
 import styles from './Home.module.css';
 import { signOut } from "next-auth/react";
-import axios from "axios";
+import InstallPWA from "../PWA/installBtn";
 
 /**
  * HOME PAGE - After signing in, you will go to this page
@@ -47,6 +46,7 @@ const Home = ({user}) => {
         <Button text="Shipments" link="/app/shipments" />
       </div>
 
+      <InstallPWA text={"install"} />
       <LittleButton text="Logout" imageDirection="right" onClick={signOut} />
 
 
