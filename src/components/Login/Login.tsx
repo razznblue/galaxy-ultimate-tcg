@@ -15,7 +15,8 @@ const contentStyles: CSSProperties = {
 const imgContainerStyles: CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
-  width: '30%'
+  width: '30%',
+  paddingTop: '7%'
 }
 
 const hStyles: CSSProperties = {
@@ -39,7 +40,7 @@ const Login = ({onClick}) => {
           <Image style={{
             width: '100%',
             height: 'auto'
-          }} src='/images/app-icon-1024-transparent.png' alt='' width='50' height='50' />
+          }} src='/images/app-icon-1024-transparent.png' alt='' width='50' height='50' priority={true} />
         </div>
         <h1 style={hStyles}>GALAXY</h1>
         <h2 style={h2Styles}>ULTIMATE TCG</h2>

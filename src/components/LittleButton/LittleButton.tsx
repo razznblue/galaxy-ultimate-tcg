@@ -8,8 +8,8 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
   const imgUrl = `https://swgu-library.onrender.com/images/ICONS/back-btn.webp`;
 
   const style: CSSProperties = {
-    width: '13%',
     height: 'auto',
+    width: '15%',
     display: 'flex',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -23,8 +23,11 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
   }
 
   const imgContainer: CSSProperties = {
-    width: '30%',
+    width: '20%',
     height: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: '3%'
   }
 
   const imgStyle: CSSProperties = {
@@ -36,7 +39,7 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
   }
 
   const textStyles: CSSProperties = {
-    fontSize: '155%'
+    fontSize: 'max(3vw, 20px)'
   }
 
   return(
