@@ -24,9 +24,9 @@ const InstallPWA = ({text, placement}) => {
     promptInstall.prompt();
   };
 
-  // if (!supportsPWA) {
-  //   return null;
-  // }
+  if (!supportsPWA) {
+    return null;
+  }
   return (
     <h6 style={{
       color: '#FFF',
