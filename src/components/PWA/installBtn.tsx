@@ -29,12 +29,14 @@ const InstallPWA = ({text, placement}) => {
   }
   return (
     <h6 style={{
+      position: 'absolute',
+      bottom: '20%',
+      right: '5%',
       color: '#FFF',
       cursor: 'pointer',
       margin: '-3%',
       fontSize: 'max(1.2vw, 20px)',
       textDecoration: 'underline',
-      marginTop: placement === 'bottom' ? '0.7%' : ''
     }} className="" onClick={handleInstall}>{text} &#8594;</h6>
   );
 };
