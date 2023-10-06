@@ -1,6 +1,6 @@
 import { modelOptions, prop } from "@typegoose/typegoose";
 
-@modelOptions({schemaOptions: {collection: "Location", versionKey: false, timestamps: true}})
+@modelOptions({ schemaOptions: { collection: "Location", versionKey: false, timestamps: true } })
 export class Location {
 
   @prop()
