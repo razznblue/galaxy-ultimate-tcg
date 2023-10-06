@@ -1,0 +1,28 @@
+.next
+out
+node_modules
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE/Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Compiled Output
+dist/
+build/
+
+# ENV
+.env.local
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
+logs
