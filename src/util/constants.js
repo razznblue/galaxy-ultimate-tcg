@@ -1,0 +1,1 @@
+export const defaultAvatarImg = "https://swgu-library.onrender.com/images/BACKGROUNDS/default-profile.png";

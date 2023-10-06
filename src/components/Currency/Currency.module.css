@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'montagu-slab-bold';
+  src: url('../../styles/fonts/MontaguSlab_36pt-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.currency {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  max-width: 100px;
+  gap: 10px;
+}
+
+.currency-image {
+  height: 3.3rem;
+  width: 3.3rem;
+  cursor: pointer;
+}
+
+.currency-text {
+  font-family: montagu-slab-bold;
+  font-size: 145%;
+}
