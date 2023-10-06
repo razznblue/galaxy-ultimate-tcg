@@ -15,7 +15,8 @@ const contentStyles: CSSProperties = {
 const imgContainerStyles: CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
-  width: '30%'
+  width: '30%',
+  paddingTop: '7%'
 }
 
 const hStyles: CSSProperties = {
