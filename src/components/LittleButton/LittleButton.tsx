@@ -17,7 +17,7 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
     zIndex: '1',
     marginTop: '6%',
     position: 'absolute',
-    bottom: '1%',
+    bottom: '2%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
   }
