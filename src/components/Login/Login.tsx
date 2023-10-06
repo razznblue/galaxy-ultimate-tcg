@@ -2,6 +2,7 @@ import MainContainer from "../MainContainer/MainContiner";
 import LittleButton from "../LittleButton/LittleButton";
 import Image from "next/image";
 import { CSSProperties } from "react";
+import InstallPWA from "../PWA/installBtn";
 
 const contentStyles: CSSProperties = {
   display: 'flex',
@@ -42,6 +43,7 @@ const Login = ({onClick}) => {
         </div>
         <h1 style={hStyles}>GALAXY</h1>
         <h2 style={h2Styles}>ULTIMATE TCG</h2>
+        <InstallPWA text={'Install'}/>
       </div>
       <LittleButton text="Sign In" imageDirection="right" onClick={onClick} />
     </MainContainer>
