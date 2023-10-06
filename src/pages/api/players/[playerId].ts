@@ -16,6 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req?.method === 'GET' && id) {
       try {
         const player = await PlayerModel.findById(id);
+        if (player && req?.query?.role === 'admin') {
+          return res.send(player.isAdmin || false);
+        }
         if (!player) { return throw404(res, `Player with Id ${id} not found`) }
         return res.send(player);
       } catch(err) {

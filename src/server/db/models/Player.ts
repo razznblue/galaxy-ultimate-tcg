@@ -32,6 +32,9 @@ export class Player {
   @prop({ default: defaultAvatarImg })
   avatarImgUrl: string;
 
+  @prop({ default: false })
+  isAdmin: string;
+
   @prop()
   provider: PlayerProvider
 

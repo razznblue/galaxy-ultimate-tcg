@@ -1,4 +1,7 @@
-import { PlayerProvider } from "../server/db/models/Player";
+interface PlayerProvider {
+  provider: string,
+  providerId: string
+}
 
 export interface CreatePlayerBody {
   username: string;

@@ -3,8 +3,15 @@ import dbConnect from "../../../server/db/db";
 import LOGGER from "../../../util/logger";
 import { CreatePlayerBody } from "../../../helpers/interfaces";
 import { throw404 } from "../../../helpers/apiHelper";
+import { authorizeSession } from "../../../helpers/apiHelper";
+import path from "path";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const sessionAuth = await authorizeSession(req, res, path.basename(__filename));
+  if (sessionAuth?.status !== 200) {
+    return res.status(sessionAuth.status).send(sessionAuth?.msg);
+  }
   await dbConnect();
 
   /* GET Players */
@@ -56,7 +63,7 @@ export default async function handler(req: any, res: any) {
 }
 
 const createPlayer = async (createPlayerBody: CreatePlayerBody, playerStatsId: any, collectionId: any) => {
-  const exists = await PlayerModel.exists({username: createPlayerBody.username});
+  const exists = await PlayerModel.exists({username: createPlayerBody.username, email: createPlayerBody.email});
   if (!exists) {
     const player: any = new PlayerModel(createPlayerBody);
     player.playerStatsId = playerStatsId;
