@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const InstallPWA = ({text}) => {
+const InstallPWA = ({text, placement}) => {
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] = useState(null);
 
@@ -23,16 +23,18 @@ const InstallPWA = ({text}) => {
     }
     promptInstall.prompt();
   };
-  if (!supportsPWA) {
-    return null;
-  }
+
+  // if (!supportsPWA) {
+  //   return null;
+  // }
   return (
     <h6 style={{
       color: '#FFF',
       cursor: 'pointer',
       margin: '-3%',
       fontSize: 'max(1.2vw, 20px)',
-      textDecoration: 'underline'
+      textDecoration: 'underline',
+      marginTop: placement === 'bottom' ? '0.7%' : ''
     }} className="" onClick={handleInstall}>{text} &#8594;</h6>
   );
 };

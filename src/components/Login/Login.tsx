@@ -43,7 +43,7 @@ const Login = ({onClick}) => {
         </div>
         <h1 style={hStyles}>GALAXY</h1>
         <h2 style={h2Styles}>ULTIMATE TCG</h2>
-        <InstallPWA text={'Install'}/>
+        <InstallPWA text={'Install'} placement={'default'}/>
       </div>
       <LittleButton text="Sign In" imageDirection="right" onClick={onClick} />
     </MainContainer>

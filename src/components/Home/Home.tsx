@@ -45,8 +45,8 @@ const Home = ({user}) => {
         <Button text="Settings" link="/app/settings" />
         <Button text="Shipments" link="/app/shipments" />
       </div>
+      <InstallPWA text={"install"} placement={"bottom"} />
 
-      <InstallPWA text={"install"} />
       <LittleButton text="Logout" imageDirection="right" onClick={signOut} />
 
 
