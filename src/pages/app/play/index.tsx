@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react';
+import { DefaultSession } from 'next-auth';
 import MainContainer from '../../../components/MainContainer/MainContiner'
 import LittleButton from '../../../components/LittleButton/LittleButton'
 import Header from '../../../components/Heading/Heading'
+import ProfilePicture from '../../../components/ProfilePicture/ProfilePicture'
+import DeckCarousel from '../../../components/DeckCarousel/DeckCarousel';
+import Button from '../../../components/Button/Button';
+
 
 const GameScreen: NextPage = () => {
   return (
@@ -13,7 +19,8 @@ const GameScreen: NextPage = () => {
   )
 }
 
-const PreGame: NextPage = () => {
+const PreGame: NextPage = ({user}: {user: DefaultSession["user"]}) => {
+  const { data: session } = useSession()
   const router = useRouter()
   const [deck, setDeck] = useState(null);
 
@@ -21,6 +28,9 @@ const PreGame: NextPage = () => {
     <MainContainer title="SWGU | CHOOSE DECK" description="Choose your deck for this game" lineArt='single-center'>
       <LittleButton text="Back" position="top-left" imageDirection="right" onClick={() => router.back()} />
       <Header text='CHOOSE DECK' color='blue' />
+      <ProfilePicture position='top-right' avatarName={session?.user?.name.split(' ')[0]} />
+      <DeckCarousel position='center' />
+      <Button text='Play!' />
     </MainContainer>
   )
 }

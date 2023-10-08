@@ -1,18 +1,24 @@
 import Image from "next/image";
 import { CSSProperties } from "react";
 
-const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg }) => {
+const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg, position }) => {
   showAvatar = showAvatar || true;
   avatarName = avatarName || 'Player';
   avatarImg = avatarImg || 'https://swgu-library.onrender.com/images/BACKGROUNDS/default-profile.png';
 
-  const imgUrl = `https://swgu-library.onrender.com/images/ICONS/sci-fi-border-${imageDirection}.webp`
+  const imgUrl = `https://swgu-library.onrender.com/images/ICONS/sci-fi-border-${imageDirection || 'horizontal'}.webp`
 
   const style: CSSProperties = {
     width: '25%',
     marginTop: '3rem',
     position: 'relative'
   }
+  style.width = position === 'top-right' ? '15%' : style.width;
+  style.position = position === 'top-right' ? 'absolute' : style.position;
+  style.top = position === 'top-right' ? '3%' : '';
+  style.right = position === 'top-right' ? '1.5%' : '';
+  style.zIndex = position === 'top-right' ? '1' : '';
+  style.marginTop = position === 'top-right' ? '0' : style.marginTop;
 
   const imgStyles: CSSProperties = {
     width: '100%',
