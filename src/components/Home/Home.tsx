@@ -19,6 +19,7 @@ const Home = ({user}) => {
   const [crystals, setCrystals] = useState<number>(0);
   const [galacticFame, setGalacticFame] = useState<number>(0);
 
+  /* Initially set Currency */
   useEffect(() => {
     setCredits(248500);
     setCrystals(324);
@@ -26,14 +27,14 @@ const Home = ({user}) => {
   }, []);
 
   return (
-    <MainContainer title="SWGU | HOME" description="Home Page of SWGU" bgImage="plain-background" lineArt="double">
+    <MainContainer title="SWGU | HOME" description="Galaxy Ultimate is the next best star wars online tcg!" bgImage="plain-background" lineArt="double">
       <div className={styles.container}>
-        <div className={styles["currency-container"]}>
+        <div className={`${styles["currency-container"]} mr-5 items-end`}>
           <Currency type="credits" amount={credits} />
           <Currency type="kyber-crystal" amount={crystals} />
         </div>
         <ProfilePicture imageDirection="horizontal" avatarName={user?.name} />
-        <div className={styles["currency-container"]}>
+        <div className={`${styles["currency-container"]} ml-5 itmes-start`}>
           <Currency type="galactic-fame" amount={galacticFame} />
         </div>
       </div>
