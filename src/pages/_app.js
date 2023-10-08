@@ -1,4 +1,4 @@
-import '../styles/global.css'
+import '../styles/globals.css'
 import ProvidersWrapper from './app/ProvidersWrapper'
 
 export default function App({ Component, pageProps: { session, ...pageProps} }) {

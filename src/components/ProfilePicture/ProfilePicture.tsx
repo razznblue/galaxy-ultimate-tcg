@@ -9,8 +9,7 @@ const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg
   const imgUrl = `https://swgu-library.onrender.com/images/ICONS/sci-fi-border-${imageDirection}.webp`
 
   const style: CSSProperties = {
-    width: 'auto',
-    height: '80%',
+    width: '25%',
     marginTop: '3rem',
     position: 'relative'
   }
@@ -34,7 +33,7 @@ const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg
   }
 
   const avatarTextStyles: CSSProperties = {
-    fontSize: '100%'
+    fontSize: '80%'
   }
 
   const avatarImgStyles: CSSProperties = {

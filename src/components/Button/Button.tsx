@@ -22,10 +22,10 @@ const Button: any = ({ imageType, text, link }) => {
 
   const textStyles: CSSProperties = {
     position: 'absolute',
-    top: '47%',
+    top: '55%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    fontSize: '155%'
+    fontSize: 'max(2vw, 20px)'
   }
 
   return(
