@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import type { NextPage } from 'next'
 import MainContainer from '../../../components/MainContainer/MainContiner'
-import Header from '../../../components/Heading/Heading'
 import ProfilePicture from '../../../components/ProfilePicture/ProfilePicture'
 
 
