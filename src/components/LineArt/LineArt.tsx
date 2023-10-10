@@ -22,6 +22,7 @@ const LineArt: any = ({ imageType, position }) => {
     objectFit: 'cover',
   }
   position === 'top' ? style.top = '0' : style.bottom = '0';
+  position === 'top-center' ? style.top = '10%' : style.top;
 
   return <div style={style}></div>
 }

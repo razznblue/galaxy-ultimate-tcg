@@ -31,7 +31,7 @@ const MainContainer: React.FC<any> = ({ title, description, bgImage, lineArt, ov
   /* LineArt preparation */
   const lineArtElements: React.ReactNode[] = [];
   if (lineArt !== 'none') {
-    lineArtElements.push(<LineArt key={generateUniqueKey()} imageType='line-art' position='top' />)
+    lineArtElements.push(<LineArt key={generateUniqueKey()} imageType='line-art' position={lineArt === 'single-center' ? 'top-center' : 'top'} />)
     if (lineArt === 'double') {
       lineArtElements.push(<LineArt key={generateUniqueKey()} imageType='line-art-reverse' position='bottom' />)
     }

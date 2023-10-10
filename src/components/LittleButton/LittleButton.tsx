@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, useEffect, CSSProperties } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
-const LittleButton: any = ({ imageDirection, text, onClick }) => {
+const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   const {windowWidth, windowHeight} = useWindowDimensions();
 
   imageDirection = imageDirection || 'left';
@@ -24,6 +24,11 @@ const LittleButton: any = ({ imageDirection, text, onClick }) => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
   }
+  style.bottom = position === 'top-left' ? '' : style.bottom;
+  style.top = position === 'top-left' ? '7%' : '';
+  style.left = position === 'top-left' ? '8%' : style.left;
+  style.margin = position === 'top-left' ? 0 : style.margin;
+  style.width = position === 'top-left' ? '' : style.width;
 
   const imgContainer: CSSProperties = {
     width: '20%',
