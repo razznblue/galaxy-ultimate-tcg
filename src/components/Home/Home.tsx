@@ -41,7 +41,7 @@ const Home = ({user}) => {
 
       {/* Button-Container */}
       <div className={styles["button-container"]}>
-        <Button text="Play!" link="/app/play" />
+        <Button text="Play!" link="/app/play/setup" />
         <Button text="Collection" link="/app/collection" />
         <Button text="Settings" link="/app/settings" />
         <Button text="Shipments" link="/app/shipments" />

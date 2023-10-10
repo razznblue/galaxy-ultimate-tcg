@@ -1,38 +1,52 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react';
-import { DefaultSession } from 'next-auth';
 import MainContainer from '../../../components/MainContainer/MainContiner'
-import LittleButton from '../../../components/LittleButton/LittleButton'
 import Header from '../../../components/Heading/Heading'
 import ProfilePicture from '../../../components/ProfilePicture/ProfilePicture'
-import DeckCarousel from '../../../components/DeckCarousel/DeckCarousel';
-import Button from '../../../components/Button/Button';
 
 
 const GameScreen: NextPage = () => {
   return (
     <MainContainer title="SWGU | PLAY SCREEN" description="It's game time!" lineArt='none'>
-    <h1>Play Game Page</h1>
-  </MainContainer>
-  )
-}
+      {/* <Header text='Play' textSize='3xl' /> */}
+      <div id="gameContainer">
+        <div id="player2">
+          <ProfilePicture />
+          <div className="hand">
+            <div className="dynamic-card"></div>
+          </div>
+          <div id="retreat-btn"></div>
+        </div>
 
-const PreGame: NextPage = ({user}: {user: DefaultSession["user"]}) => {
-  const { data: session } = useSession()
-  const router = useRouter()
-  const [deck, setDeck] = useState(null);
+        <div id="game-board">
+          <div id="column1">
+            <div className="player2cards"></div>
+            <div id="location1"></div>
+            <div className="player1cards"></div>
+          </div>
+          <div id="column2">
+            <div className="player2cards"></div>
+            <div id="location2"></div>
+            <div className="player1cards"></div>
+          </div>
+          <div id="column3">
+            <div className="player2cards"></div>
+            <div id="location3"></div>
+            <div className="player1cards"></div>
+          </div>
+        </div>
 
-  return (
-    <MainContainer title="SWGU | CHOOSE DECK" description="Choose your deck for this game" lineArt='single-center'>
-      <LittleButton text="Back" position="top-left" imageDirection="right" onClick={() => router.back()} />
-      <Header text='CHOOSE DECK' color='blue' />
-      <ProfilePicture position='top-right' avatarName={session?.user?.name.split(' ')[0]} />
-      <DeckCarousel position='center' />
-      <Button text='Play!' />
+        <div id="player1">
+          <ProfilePicture />
+          <div className="hand">
+            <div className="dynamic-card"></div>
+          </div>
+          <div id="energy-marker"><p>4</p></div>
+          <div id="retreat-btn"></div>
+        </div>
+      </div>
     </MainContainer>
   )
 }
 
-export default PreGame
+export default GameScreen

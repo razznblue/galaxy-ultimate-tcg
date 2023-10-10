@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties } from "react";
 
-const Button: any = ({ imageType, text, link }) => {
+const Button: any = ({ imageType, text, link, position }) => {
   imageType = imageType || 'menu-btn';
   text = text || 'undefined';
 
@@ -14,6 +14,9 @@ const Button: any = ({ imageType, text, link }) => {
     height: 'auto',
     cursor: 'pointer',
   }
+  style.position = position === 'bottom' ? 'absolute' : style.position;
+  style.bottom = position === 'bottom' ? '8%' : '';
+  style.width = position === 'bottom' ? '25%' : style.width;
 
   const imgStyle: CSSProperties = {
     width: '100%',
