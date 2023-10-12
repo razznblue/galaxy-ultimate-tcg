@@ -11,18 +11,20 @@ export interface CreatePlayerBody {
 
 export interface CreateCardBody {
   name: string;
-  description: string;
   abilityText: string;
   abilityType: string;
   cost: number;
   power: number;
   health: number;
   image: string;
+  tags: string[];
+  isVariant: string;
+  variantName: string;
+  visible: string;
 }
 
 export interface UpdateCardBody {
   name: string;
-  description: string;
   abilityText: string;
   abilityType: string;
   cost: number;
@@ -36,5 +38,6 @@ export interface CreateLocationBody {
   abilityText: string;
   abilityType: string;
   image: string;
+  tags: string[],
   visible: string;
 }

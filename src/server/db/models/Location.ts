@@ -15,6 +15,9 @@ export class Location {
   @prop()
   image: string;
 
+  @prop()
+  tags: string[];
+
   @prop({ default: false })
   visible: boolean;
 }

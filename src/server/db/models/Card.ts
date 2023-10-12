@@ -22,10 +22,16 @@ export class Card {
   health: number;
 
   @prop()
+  tags: string[];
+
+  @prop()
   image: string;
 
   @prop({ default: false })
   visible: boolean;
+
+  @prop()
+  variantName: string
 
   @prop({ default: false })
   isVariant: boolean

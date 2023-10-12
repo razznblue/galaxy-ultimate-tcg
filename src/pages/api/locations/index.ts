@@ -2,9 +2,9 @@ import path from "path";
 import { LocationModel } from "../../../server/db/models";
 import dbConnect from "../../../server/db/db";
 import LOGGER from "../../../util/logger";
-import { CreateLocationBody } from "../../../helpers/interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 import { authorizeSession } from "../../../helpers/apiHelper";
+import { createLocation } from "../../../server/controllers/LocationController";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const sessionAuth = await authorizeSession(req, res, path.basename(__filename));
@@ -24,20 +24,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     try {
 
-      const body: CreateLocationBody = req?.body;
-      const existingData = await LocationModel.findOne({ name: req?.body?.name });
-      if (existingData) {
-        return res.status(409).json({responseCode: 409, msg: `${record} with name ${req?.body?.name} already exists`});
+      const createResponse = await createLocation(req?.body)
+      if (createResponse?.responseCode !== 201) {
+        res.status(createResponse?.responseCode).send(createResponse?.msg);
       }
 
-      const data = new LocationModel(body);
-      await data.save();
-
-      LOGGER.info(`Created new ${record} with Id ${data._id}`);
-      return res.status(201).json(data.toJSON());
+      LOGGER.info(`Created new ${record} with Id ${createResponse?.data?._id}`);
+      return res.status(createResponse?.responseCode).json(createResponse?.data?.toJSON());
     } catch(err) {
       LOGGER.error(err);
-      LOGGER.error(`Could not save card due to error`);
+      LOGGER.error(`Could not save ${record} due to error`);
       return res.status(500).send('Unexpected Error. Check logs');
     }
   } else {

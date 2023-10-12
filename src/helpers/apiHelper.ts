@@ -29,6 +29,28 @@ export const userIsAdmin = async (username: string, email: string) => {
   }
 }
 
+/**
+ * Used to authenticate routes under the /api/jobs folder via an accessKey
+ * @param req contains the username/accessKey in order for this request to pass successfully
+ * @param resource only needed to display on the log message if there is an error
+ * @returns true if successful
+ */
+export const authenticateKey = async (req: NextApiRequest, res: NextApiResponse, resource: string) => {
+  const username = req?.body?.username;
+  const accessKey = req?.body?.accessKey;
+  if (!username || !accessKey) {
+    console.warn(`Authentication Invalid. Job ${resource} was not processed`)
+    return res.status(400).send(`Authentication Invalid. Job ${resource} was not processed`)
+  }
+  await dbConnect();
+  const admin = await PlayerModel.findOne({ username: username, accessKey: accessKey });
+  if (!admin) {
+    console.warn(`Unauthorized. Job ${resource} was not processed`)
+    return res.status(401).send(`Unauthorized. Job ${resource} was not processed`);
+  } 
+  return true;
+}
+
 export const throw404 = (res: any, msg: string) => {
   LOGGER.error(msg)
   return res.status(404).send();
