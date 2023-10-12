@@ -14,7 +14,7 @@ export const createLocation = async (body: CreateLocationBody) => {
   
     const data = new LocationModel(body);
     await data.save();
-    return {responseCode: 202, data: data};
+    return {responseCode: 201, data: data};
   } catch(err) {
     return {responseCode: 500, msg: `unknown error occured while trying to create location ${body?.name}`}
   } 

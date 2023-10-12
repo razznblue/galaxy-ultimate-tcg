@@ -25,12 +25,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
 
       const createResponse = await createLocation(req?.body)
-      if (createResponse?.responseCode !== 200) {
+      if (createResponse?.responseCode !== 201) {
         res.status(createResponse?.responseCode).send(createResponse?.msg);
       }
 
       LOGGER.info(`Created new ${record} with Id ${createResponse?.data?._id}`);
-      return res.status(201).json(createResponse?.data?.toJSON());
+      return res.status(createResponse?.responseCode).json(createResponse?.data?.toJSON());
     } catch(err) {
       LOGGER.error(err);
       LOGGER.error(`Could not save ${record} due to error`);

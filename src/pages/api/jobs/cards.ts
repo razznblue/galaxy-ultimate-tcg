@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import LOGGER from '../../../util/logger';
 import { authenticateKey } from '../../../helpers/apiHelper';
 import { CreateCardBody } from '../../../helpers/interfaces';
+import { createCard, updateCard } from '../../../server/controllers/CardController';
 
 const NAME_HEADER = 'NAME';
 
@@ -31,7 +32,8 @@ const scrapeData = async () => {
         power: $(columns[4]).text().trim(),
         health: $(columns[5]).text().trim(),
         tags: $(columns[6]).text().trim(),
-        visible: $(columns[7]).text().trim()
+        variantName: $(columns[7]).text().trim(),
+        visible: $(columns[8]).text().trim()
       };
 
       cards.push(rowData);
@@ -41,8 +43,36 @@ const scrapeData = async () => {
   return { count, cards };
 }
 
-const formatAndSaveCards = async (cards: any) => {
+const formatAndSave = async (cards: any) => {
+  for (const card of cards) {
+    const body: CreateCardBody = {
+      name: card?.name,
+      abilityText: card?.ability,
+      abilityType: card?.type,
+      cost: card?.cost,
+      power: card?.power,
+      health: card?.health,
+      tags: card?.tags.includes(', ') ? card?.tags.split(', ') : card?.tags === '' ? undefined : [card?.tags],
+      isVariant: card?.variantName !== '' ? 'true' : 'false',
+      variantName: card?.variantName || undefined,
+      image: card?.variantName !== '' 
+        ? `https://swgu-library.onrender.com/images/CARD_FRONTS/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}-${card?.variantName}.webp`
+        : `https://swgu-library.onrender.com/images/CARD_FRONTS/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
+      visible: card?.visible?.toLowerCase() === 'false' ? 'false' : 'true'
+    }
 
+    const createResponse = await createCard(body);
+    createResponse?.responseCode !== 201
+      ? LOGGER.error(`Could not save card ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
+      : LOGGER.info(`Created new card ${body?.name}`);
+
+    if (process.env.UPDATE_CARDS === 'true' && createResponse?.responseCode !== 201) {
+      const updateReponse = await updateCard(body);
+      updateReponse.responseCode !== 204
+        ? LOGGER.error(`Could not update card ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
+        : LOGGER.info(`Updated card ${body?.name}`);
+    }
+  }
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -53,6 +83,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const data: any = await scrapeData();
       LOGGER.info(`Scraped ${data?.count} cards`);
       res.send(data || []);
+
+      await formatAndSave(data?.cards);
     }
   } catch(err) {
     LOGGER.error(err);
