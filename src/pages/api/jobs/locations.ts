@@ -52,13 +52,13 @@ const formatAndSave = async (locations: any) => {
 
     const createResponse = await createLocation(body);
     createResponse.responseCode !== 201
-      ? LOGGER.error(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
+      ? LOGGER.warn(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
       : LOGGER.info(`Created new Location ${body?.name}`);
     
     if (process.env.UPDATE_LOCATIONS === 'true' && createResponse.responseCode !== 201) {
       const updateReponse = await updateLocation(body);
       updateReponse.responseCode !== 204
-        ? LOGGER.error(`Could not update location ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
+        ? LOGGER.warn(`Could not update location ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
         : LOGGER.info(`Updated Location ${body?.name}`);
     }
   }

@@ -63,13 +63,13 @@ const formatAndSave = async (cards: any) => {
 
     const createResponse = await createCard(body);
     createResponse?.responseCode !== 201
-      ? LOGGER.error(`Could not save card ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
+      ? LOGGER.warn(`Could not save card ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
       : LOGGER.info(`Created new card ${body?.name}`);
 
     if (process.env.UPDATE_CARDS === 'true' && createResponse?.responseCode !== 201) {
       const updateReponse = await updateCard(body);
       updateReponse.responseCode !== 204
-        ? LOGGER.error(`Could not update card ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
+        ? LOGGER.warn(`Could not update card ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
         : LOGGER.info(`Updated card ${body?.name}`);
     }
   }
