@@ -40,8 +40,6 @@ const scrapeData = async () => {
 }
 
 const formatAndSave = async (locations: any) => {
-  const shouldUpdate = process.env.UPDATE_LOCATIONS === 'true';
-
   for (const location of locations) {
     const body: CreateLocationBody = {
       name: location?.name,
@@ -51,21 +49,17 @@ const formatAndSave = async (locations: any) => {
       image: `https://swgu-library.onrender.com/images/LOCATIONS/location-${location?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
       visible: location?.visible?.toLowerCase() === 'false' ? 'false' : 'true'
     }
-
-    if (shouldUpdate) {
+    
+    if (process.env.UPDATE_LOCATIONS === 'true') {
       const updateReponse = await updateLocation(body);
-      if (updateReponse.responseCode !== 204) {
-        LOGGER.error(`Could not update location ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`);
-      } else {
-        LOGGER.info(`Updated Location ${body?.name}`);
-      }
+      updateReponse.responseCode !== 204
+        ? LOGGER.error(`Could not update location ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`)
+        : LOGGER.info(`Updated Location ${body?.name}`);
     } else {
       const createResponse = await createLocation(body);
-      if (createResponse.responseCode !== 202) {
-        LOGGER.error(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`);
-      } else {
-        LOGGER.info(`Created new Location ${body?.name}`);
-      }
+      createResponse.responseCode !== 202
+        ? LOGGER.error(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`)
+        : LOGGER.info(`Created new Location ${body?.name}`);
     }
   }
 }
