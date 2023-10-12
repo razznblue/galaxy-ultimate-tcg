@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import LOGGER from '../../../util/logger';
 import { authenticateKey } from '../../../helpers/apiHelper';
 import { CreateLocationBody } from '../../../helpers/interfaces';
-import { createLocation } from '../../../server/controllers/LocationController';
+import { createLocation, updateLocation } from '../../../server/controllers/LocationController';
 
 const HEADER_CHECK = 'ABILITY';
 
@@ -28,7 +28,8 @@ const scrapeData = async () => {
         name: $(columns[0]).text().trim(),
         ability: $(columns[1]).text().trim(),
         type: $(columns[2]).text().trim(),
-        tags: $(columns[3]).text().trim()
+        tags: $(columns[3]).text().trim(),
+        visible: $(columns[4]).text().trim()
       };
 
       locations.push(rowData);
@@ -39,6 +40,8 @@ const scrapeData = async () => {
 }
 
 const formatAndSave = async (locations: any) => {
+  const shouldUpdate = process.env.UPDATE_LOCATIONS === 'true';
+
   for (const location of locations) {
     const body: CreateLocationBody = {
       name: location?.name,
@@ -46,13 +49,23 @@ const formatAndSave = async (locations: any) => {
       abilityType: location?.type,
       tags: location?.tags.includes(', ') ? location?.tags.split(', ') : location?.tags === '' ? undefined : [location?.tags],
       image: `https://swgu-library.onrender.com/images/LOCATIONS/location-${location?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
-      visible: 'true'
+      visible: location?.visible?.toLowerCase() === 'false' ? 'false' : 'true'
     }
-    const createResponse = await createLocation(body);
-    if (createResponse.responseCode !== 202) {
-      LOGGER.error(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`);
+
+    if (shouldUpdate) {
+      const updateReponse = await updateLocation(body);
+      if (updateReponse.responseCode !== 204) {
+        LOGGER.error(`Could not update location ${body?.name} to DB. Err Code: ${updateReponse?.responseCode}. Msg: ${updateReponse?.msg}`);
+      } else {
+        LOGGER.info(`Updated Location ${body?.name}`);
+      }
     } else {
-      LOGGER.info(`Created new Location ${body?.name}`);
+      const createResponse = await createLocation(body);
+      if (createResponse.responseCode !== 202) {
+        LOGGER.error(`Could not save location ${body?.name} to DB. Err Code: ${createResponse?.responseCode}. Msg: ${createResponse?.msg}`);
+      } else {
+        LOGGER.info(`Created new Location ${body?.name}`);
+      }
     }
   }
 }

@@ -30,7 +30,8 @@ const scrapeData = async () => {
         cost: $(columns[3]).text().trim(),
         power: $(columns[4]).text().trim(),
         health: $(columns[5]).text().trim(),
-        tags: $(columns[6]).text().trim()
+        tags: $(columns[6]).text().trim(),
+        visible: $(columns[7]).text().trim()
       };
 
       cards.push(rowData);

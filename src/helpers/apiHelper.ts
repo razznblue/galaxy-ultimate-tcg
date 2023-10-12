@@ -38,8 +38,6 @@ export const userIsAdmin = async (username: string, email: string) => {
 export const authenticateKey = async (req: NextApiRequest, res: NextApiResponse, resource: string) => {
   const username = req?.body?.username;
   const accessKey = req?.body?.accessKey;
-  console.log(username);
-  console.log(accessKey);
   if (!username || !accessKey) {
     console.warn(`Authentication Invalid. Job ${resource} was not processed`)
     return res.status(400).send(`Authentication Invalid. Job ${resource} was not processed`)
