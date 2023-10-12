@@ -36,5 +36,6 @@ export interface CreateLocationBody {
   abilityText: string;
   abilityType: string;
   image: string;
+  tags: string[],
   visible: string;
 }

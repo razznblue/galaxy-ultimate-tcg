@@ -21,7 +21,7 @@ class CardRef {
 
 @modelOptions({schemaOptions: {versionKey: false, timestamps: false, _id: false}})
 class DeckRef {
-  @prop({ ref: Deck })
+  @prop({ ref: () => Deck })
   deckId: typegoose.Ref<Deck>
 
   @prop()
