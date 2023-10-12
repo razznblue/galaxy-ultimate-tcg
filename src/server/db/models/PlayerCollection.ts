@@ -13,6 +13,9 @@ class CardRef {
 
   @prop() /* CardLevel - Determines the border color/effects */
   level: number
+
+  @prop()
+  timesPlayed: number
 }
 
 @modelOptions({schemaOptions: {collection: "PlayerCollection", versionKey: false, timestamps: true}})
