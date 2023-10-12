@@ -5,7 +5,7 @@ const { modelOptions, prop } = typegoose;
 
 @modelOptions({schemaOptions: {versionKey: false, timestamps: false, _id: false}})
 class CardRef {
-  @prop({ ref: () => Card })
+  @prop({ ref: Card })
   cardId: typegoose.Ref<Card>
 
   @prop()
@@ -18,6 +18,6 @@ class CardRef {
 @modelOptions({schemaOptions: {collection: "PlayerCollection", versionKey: false, timestamps: true}})
 export class PlayerCollection {
 
-  @prop({ default: []})
-  cards: CardRef[]
+  @prop({ ref: CardRef })
+  cards: typegoose.Ref<CardRef>[]
 }
