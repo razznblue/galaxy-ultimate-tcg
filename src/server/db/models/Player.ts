@@ -5,11 +5,6 @@ import { defaultAvatarImg } from "../../../util/constants"
 
 const { modelOptions, prop } = typegoose;
 
-// enum LoginMethods {
-//   EMAIL = 'EMAIL',
-//   GOOGLE = 'GOOGLE'
-// }
-
 @modelOptions({schemaOptions: {versionKey: false, timestamps: false, _id: false}})
 export class PlayerProvider {
   @prop()
