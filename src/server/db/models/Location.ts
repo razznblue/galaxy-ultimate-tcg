@@ -15,7 +15,7 @@ export class Location {
   @prop()
   image: string;
 
-  @prop()
+  @prop({type: () => [String]})
   tags: string[];
 
   @prop({ default: false })
