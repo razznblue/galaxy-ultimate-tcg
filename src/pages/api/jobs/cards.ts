@@ -82,11 +82,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.time(JOB_NAME);
       const data: any = await scrapeData();
       LOGGER.info(`Scraped ${data?.count} cards`);
-      res.send(data || []);
-
+      
       await formatAndSave(data?.cards);
       LOGGER.info(`Finished Processing ${JOB_NAME}`);
       console.timeEnd(JOB_NAME);
+      res.send(data || []);
     }
   } catch(err) {
     LOGGER.error(err);
