@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { useState, useEffect, CSSProperties } from "react";
+import { CSSProperties } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import Text from "../Text/Text";
+import { motion } from "framer-motion";
 
 const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   const {windowWidth, windowHeight} = useWindowDimensions();
@@ -48,13 +50,21 @@ const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   }
 
   const textStyles: CSSProperties = {
-    fontSize: 'max(3vw, 20px)'
+    fontSize: 'max(3vw, 20px)',
+    color: '#FFF'
   }
 
   return(
     <div style={style} onClick={onClick}>
-      <div style={imgContainer}><Image src={imgUrl} width="100" height="100" alt="" style={imgStyle} /></div>
-      <p style={textStyles}>{text}</p>
+      <motion.div
+        initial={{ opacity: 0, y: -60 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }} 
+        transition={{ type: "spring", stiffness: 100 }} 
+        style={imgContainer}>
+        <Image src={imgUrl} width="100" height="100" alt="" style={imgStyle} />
+      </motion.div>
+      <Text text={text} customStyle={textStyles} animationType='typeWriter' />
     </div>
   )
 }
