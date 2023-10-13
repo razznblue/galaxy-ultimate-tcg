@@ -1,4 +1,4 @@
-import { useState, useEffect, CSSProperties } from "react";
+import { useState, useEffect } from "react";
 
 import MainContainer from "../MainContainer/MainContiner";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
@@ -9,7 +9,7 @@ import LittleButton from "../LittleButton/LittleButton";
 import styles from './Home.module.css';
 import { signOut } from "next-auth/react";
 import InstallPWA from "../PWA/installBtn";
-import SFX from "../../util/sfx";
+import BackgroundAudio from "../BackgroundAudio/BackgroundAudio";
 
 /**
  * HOME PAGE - After signing in, you will go to this page
@@ -19,8 +19,6 @@ const Home = ({user}) => {
   const [credits, setCredits] = useState<number>(0);
   const [crystals, setCrystals] = useState<number>(0);
   const [galacticFame, setGalacticFame] = useState<number>(0);
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const [playText, setPlayText] = useState('Play Audio');
 
   /* Initially set Currency */
   useEffect(() => {
@@ -29,21 +27,9 @@ const Home = ({user}) => {
     setGalacticFame(102);
   }, []);
 
-  const toggleAudio = () => {
-    if (audioPlaying) {
-      SFX.background.pause();
-      setAudioPlaying(false);
-      setPlayText('Play Audio');
-    } else {
-      SFX.background.play();
-      setAudioPlaying(true);
-      setPlayText('Pause Audio');
-    }
-  }
-
   return (
     <MainContainer title="SWGU | HOME" description="Galaxy Ultimate is the next best star wars online tcg!" bgImage="plain-background" lineArt="double">
-      <div className="absolute top-[15%] right-[3%]" style={{color: '#FFF'}} onClick={toggleAudio}>{playText}</div>
+      <BackgroundAudio styleClasses='absolute top-[15%] right-[3%]' />
 
       <div className={styles.container}>
         <div className={`${styles["currency-container"]} mr-5 items-end`}>

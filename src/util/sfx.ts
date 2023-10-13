@@ -12,7 +12,7 @@ const SFX = {
     src: [sounds.BG],
     html5: true,
     loop: true,
-    volume: 0.5,
+    volume: 0.5
   }),
   pop: new Howl({
     src: [sounds.POP],
