@@ -7,6 +7,7 @@ import { CreateCardBody } from '../../../helpers/interfaces';
 import { createCard, updateCard } from '../../../server/controllers/CardController';
 
 const NAME_HEADER = 'NAME';
+const JOB_NAME = 'CARDS_PIPELINE'
 
 const scrapeData = async () => {
   const cardsSheetUrl = process.env.CARDS_SHEET_URL;
@@ -44,7 +45,7 @@ const scrapeData = async () => {
 }
 
 const formatAndSave = async (cards: any) => {
-  for (const card of cards) {
+  const createPromises = cards.map(async (card: any) => {
     const body: CreateCardBody = {
       name: card?.name,
       abilityText: card?.ability,
@@ -66,19 +67,26 @@ const formatAndSave = async (cards: any) => {
     if (process.env.UPDATE_CARDS === 'true' && createResponse?.responseCode !== 201) {
       await updateCard(body);
     }
-  }
+  });
+
+  await Promise.all(createPromises);
+
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req?.method !== 'POST') res.status(404).send('Method Not Found');
+  LOGGER.info(`Starting ${JOB_NAME}`);
 
   try {
     if(await authenticateKey(req, res, 'cards')) {
+      console.time(JOB_NAME);
       const data: any = await scrapeData();
       LOGGER.info(`Scraped ${data?.count} cards`);
       res.send(data || []);
 
       await formatAndSave(data?.cards);
+      LOGGER.info(`Finished Processing ${JOB_NAME}`);
+      console.timeEnd(JOB_NAME);
     }
   } catch(err) {
     LOGGER.error(err);

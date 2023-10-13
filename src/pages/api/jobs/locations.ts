@@ -7,6 +7,7 @@ import { CreateLocationBody } from '../../../helpers/interfaces';
 import { createLocation, updateLocation } from '../../../server/controllers/LocationController';
 
 const HEADER_CHECK = 'ABILITY';
+const JOB_NAME = 'LOCATIONS_PIPELINE';
 
 const scrapeData = async () => {
   const sheetUrl = process.env.LOCATIONS_SHEET_URL;
@@ -40,7 +41,7 @@ const scrapeData = async () => {
 }
 
 const formatAndSave = async (locations: any) => {
-  for (const location of locations) {
+  const createPromises = locations.map(async (location) => {
     const body: CreateLocationBody = {
       name: location?.name,
       abilityText: location?.ability,
@@ -55,21 +56,25 @@ const formatAndSave = async (locations: any) => {
     if (process.env.UPDATE_LOCATIONS === 'true' && createResponse.responseCode !== 201) {
       await updateLocation(body);
     }
-  }
+  });
+
+  await Promise.all(createPromises);
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req?.method !== 'POST') res.status(404).send('Method Not Found');
-  LOGGER.info(`Starting LOCATIONS Job`);
+  LOGGER.info(`Starting ${JOB_NAME}`);
 
   try {
     if(await authenticateKey(req, res, 'cards')) {
+      console.time(JOB_NAME);
       const data: any = await scrapeData();
       LOGGER.info(`Scraped ${data?.count} locations`);
       res.send(data || []);
 
       await formatAndSave(data?.locations);
-      LOGGER.info(`Finished Processing LOCATIONS Job`);
+      LOGGER.info(`Finished Processing ${JOB_NAME}`);
+      console.timeEnd(JOB_NAME);
     }
   } catch(err) {
     LOGGER.error(err);
