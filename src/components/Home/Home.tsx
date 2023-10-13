@@ -9,6 +9,7 @@ import LittleButton from "../LittleButton/LittleButton";
 import styles from './Home.module.css';
 import { signOut } from "next-auth/react";
 import InstallPWA from "../PWA/installBtn";
+import SFX from "../../util/sfx";
 
 /**
  * HOME PAGE - After signing in, you will go to this page
@@ -18,6 +19,8 @@ const Home = ({user}) => {
   const [credits, setCredits] = useState<number>(0);
   const [crystals, setCrystals] = useState<number>(0);
   const [galacticFame, setGalacticFame] = useState<number>(0);
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [playText, setPlayText] = useState('Play Audio');
 
   /* Initially set Currency */
   useEffect(() => {
@@ -26,8 +29,22 @@ const Home = ({user}) => {
     setGalacticFame(102);
   }, []);
 
+  const toggleAudio = () => {
+    if (audioPlaying) {
+      SFX.background.pause();
+      setAudioPlaying(false);
+      setPlayText('Play Audio');
+    } else {
+      SFX.background.play();
+      setAudioPlaying(true);
+      setPlayText('Pause Audio');
+    }
+  }
+
   return (
     <MainContainer title="SWGU | HOME" description="Galaxy Ultimate is the next best star wars online tcg!" bgImage="plain-background" lineArt="double">
+      <div className="absolute top-[15%] right-[3%]" style={{color: '#FFF'}} onClick={toggleAudio}>{playText}</div>
+
       <div className={styles.container}>
         <div className={`${styles["currency-container"]} mr-5 items-end`}>
           <Currency type="credits" amount={credits} />
@@ -41,7 +58,7 @@ const Home = ({user}) => {
 
       {/* Button-Container */}
       <div className={styles["button-container"]}>
-        <Button text="Play!" link="/app/play/setup" />
+        <Button text="Play" link="/app/play/setup" />
         <Button text="Collection" link="/app/collection" />
         <Button text="Settings" link="/app/settings" />
         <Button text="Shipments" link="/app/shipments" />

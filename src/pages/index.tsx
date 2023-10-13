@@ -1,10 +1,8 @@
 import type { NextPage } from 'next'
-import { useEffect } from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { DefaultSession } from 'next-auth';
 import Home from '../components/Home/Home';
 import Login from '../components/Login/Login';
-import axios from 'axios';
 
 
 const HomePage: NextPage = ({user}: {user: DefaultSession["user"]}) => {
