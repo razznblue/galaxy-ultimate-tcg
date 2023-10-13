@@ -24,7 +24,7 @@ export class Card {
   @prop()
   tags: string[];
 
-  @prop()
+  @prop({type: () => [String]})
   image: string;
 
   @prop({ default: false })
