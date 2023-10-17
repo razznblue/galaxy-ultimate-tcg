@@ -33,4 +33,11 @@ const SFX = {
   })
 }
 
-export default SFX
+/* Background Music Exports */
+export const playBackgroundMusic = () => SFX.background.play()
+export const pauseBackgroundMusic = () => SFX.background.pause()
+
+/* Sound Effect Exports */
+export const playButtonClick = () => SFX.pop.play()
+export const playSecondarySound = () => SFX.glassWoosh.play()
+export const playError = () => SFX.error.play()

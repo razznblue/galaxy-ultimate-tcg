@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CSSProperties } from "react";
 
-const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg, position }) => {
+const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg, position, customTailwind }) => {
   showAvatar = showAvatar || true;
   avatarName = avatarName || 'Player';
   avatarImg = avatarImg || 'https://swgu-library.onrender.com/images/BACKGROUNDS/default-profile.png';
@@ -53,7 +53,7 @@ const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg
   }
 
   return (
-    <div style={style}> 
+    <div style={style} className={`${customTailwind}`}> 
       <Image src={imgUrl} width="100" height="100" alt="" style={imgStyles} /> 
       <Image src={avatarImg} width="100" height="100" alt="" style={avatarImgStyles} />
       <div className="avatar-border" style={avatarStyles}>
