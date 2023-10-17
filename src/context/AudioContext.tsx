@@ -9,23 +9,15 @@ export const AudioProvider = ({ children }) => {
 
     /* Toggle Audio */
     const toggleAudio = () => {
-        if (playText !== 'Pausing...') {
-            if (audioPlaying) {
-                const fadeOutTime = 2000;
-                SFX.background.fade(1, 0, fadeOutTime);
-                setPlayText('Pausing...');
-                setTimeout(() => {
-                    SFX.background.pause();
-                    setAudioPlaying(false);
-                    setPlayText('Play Audio');
-                }, fadeOutTime)
-            } else {
-                SFX.background.fade(0, 1, 100);
-                SFX.background.play();
-                setAudioPlaying(true);
-                setPlayText('Pause Audio');
-            }
-        }
+      if (audioPlaying) {
+        SFX.background.pause();
+        setAudioPlaying(false);
+        setPlayText('Play Audio');
+      } else {
+        SFX.background.play();
+        setAudioPlaying(true);
+        setPlayText('Pause Audio');
+      }
     }
 
   return (
