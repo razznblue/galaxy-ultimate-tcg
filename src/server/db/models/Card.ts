@@ -21,10 +21,10 @@ export class Card {
   @prop()
   health: number;
 
-  @prop()
+  @prop({type: () => [String]})
   tags: string[];
 
-  @prop({type: () => [String]})
+  @prop()
   image: string;
 
   @prop({ default: false })
