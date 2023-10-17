@@ -10,6 +10,7 @@ import styles from './Home.module.css';
 import { signOut } from "next-auth/react";
 import InstallPWA from "../PWA/installBtn";
 import BackgroundAudio from "../BackgroundAudio/BackgroundAudio";
+import { motion } from "framer-motion";
 
 /**
  * HOME PAGE - After signing in, you will go to this page
@@ -31,7 +32,13 @@ const Home = ({user}) => {
     <MainContainer title="SWGU | HOME" description="Galaxy Ultimate is the next best star wars online tcg!" bgImage="plain-background" lineArt="double">
       <BackgroundAudio styleClasses='absolute top-[15%] right-[3%]' />
 
-      <div className={styles.container}>
+      <motion.div 
+        className={styles.container}
+        initial={{ opacity: 0, y: -60 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }} 
+        transition={{ type: "spring", stiffness: 100 }}
+      >
         <div className={`${styles["currency-container"]} mr-5 items-end`}>
           <Currency type="credits" amount={credits} />
           <Currency type="kyber-crystal" amount={crystals} />
@@ -40,7 +47,7 @@ const Home = ({user}) => {
         <div className={`${styles["currency-container"]} ml-5 itmes-start`}>
           <Currency type="galactic-fame" amount={galacticFame} />
         </div>
-      </div>
+      </motion.div>
 
       {/* Button-Container */}
       <div className={styles["button-container"]}>

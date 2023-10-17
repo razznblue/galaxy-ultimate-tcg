@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties } from "react";
+import Text from "../Text/Text";
 
 const Button: any = ({ imageType, text, link, position }) => {
   imageType = imageType || 'menu-btn';
@@ -28,13 +29,14 @@ const Button: any = ({ imageType, text, link, position }) => {
     top: '55%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    fontSize: 'max(2vw, 20px)'
+    fontSize: 'max(2vw, 20px)',
+    color: '#FFF'
   }
 
   return(
     <Link href={link} style={style}>
       <Image src={imgUrl} width="100" height="100" alt="" style={imgStyle} />
-      <p style={textStyles}>{text}</p>
+      <Text text={text} customStyle={textStyles} animationType='typeWriter' />
     </Link>
   )
 }
