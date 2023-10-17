@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { playSecondarySound } from "../../util/sfx";
 
 const InstallPWA = ({text, placement}) => {
   const [supportsPWA, setSupportsPWA] = useState(false);
@@ -19,6 +20,7 @@ const InstallPWA = ({text, placement}) => {
   }, []);
 
   const handleInstall = (evt) => {
+    playSecondarySound();
     evt.preventDefault();
     if (!promptInstall) {
       return;

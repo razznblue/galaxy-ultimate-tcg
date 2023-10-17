@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import SFX from '../util/sfx';
+import { playBackgroundMusic, pauseBackgroundMusic } from '../util/sfx';
 
 const AudioContext = createContext<any>(undefined as never);
 
@@ -10,11 +10,11 @@ export const AudioProvider = ({ children }) => {
     /* Toggle Audio */
     const toggleAudio = () => {
       if (audioPlaying) {
-        SFX.background.pause();
+        pauseBackgroundMusic()
         setAudioPlaying(false);
         setPlayText('Play Audio');
       } else {
-        SFX.background.play();
+        playBackgroundMusic()
         setAudioPlaying(true);
         setPlayText('Pause Audio');
       }

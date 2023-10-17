@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Text from "../Text/Text";
 import { motion } from "framer-motion";
+import { playSecondarySound } from "../../util/sfx";
 
 const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   const {windowWidth, windowHeight} = useWindowDimensions();
@@ -54,8 +55,13 @@ const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
     color: '#FFF'
   }
 
+  const handleClick = () => {
+    playSecondarySound()
+    onClick();
+  }
+
   return(
-    <div style={style} onClick={onClick}>
+    <div style={style} onClick={handleClick}>
       <motion.div
         initial={{ opacity: 0, y: -60 }}
         animate={{ opacity: 1, y: 0 }}
