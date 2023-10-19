@@ -9,17 +9,14 @@ const HomePage: NextPage = ({user}: {user: DefaultSession["user"]}) => {
   const { data: session } = useSession()
 
   const signInUser = () => {
-    if (!session) signIn()
+    if (!session) signIn('google')
   }
 
   if (session) {
-    console.log('session');
-    console.log(session);
     return <Home user={session.user} />
   }
   if (user) {
     console.log('DefaultSession:');
-    console.log(user);
   } 
   return <Login onClick={signInUser} />
 }
