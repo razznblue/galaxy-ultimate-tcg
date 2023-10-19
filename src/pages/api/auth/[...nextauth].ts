@@ -74,6 +74,9 @@ export const authOptions = {
       
     }
   },
+  pages: {
+    signIn: '/'
+  }
 }
 
 const authHandler = NextAuth(authOptions);
