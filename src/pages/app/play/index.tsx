@@ -4,6 +4,7 @@ import MainContainer from '../../../components/MainContainer/MainContiner'
 import ProfilePicture from '../../../components/ProfilePicture/ProfilePicture'
 import Location from '../../../components/Location/Location'
 import Card from '../../../components/Card/Card'
+import { assetServiceUrl } from '../../../util/constants'
 
 const GameScreen: NextPage = () => {
   const [location1, setLocation1] = useState(null);
@@ -22,14 +23,14 @@ const GameScreen: NextPage = () => {
     })
     setLocation2({
       type: 'revealed',
-      img: 'https://swgu-library.onrender.com/images/LOCATIONS/location-kamino.webp',
+      img: `${assetServiceUrl}/IMAGES/locations/location-kamino.webp`,
       text: 'When you play a card here, add a copy to another location',
       player1Score: 12,
       player2Score: 3
     })
     setLocation1({
       type: 'revealed',
-      img: 'https://swgu-library.onrender.com/images/LOCATIONS/location-mandalore.webp',
+      img: `${assetServiceUrl}/IMAGES/locations/location-mandalore.webp`,
       text: 'Instant abilities happen twice here',
       player1Score: 0,
       player2Score: 0
@@ -43,7 +44,7 @@ const GameScreen: NextPage = () => {
       power: 2,
       health: 3,
       tags: ['dark side, empire, imperial remnant'],
-      image: 'https://swgu-library.onrender.com/images/CARD_FRONTS/thrawne.webp',
+      image: `${assetServiceUrl}/IMAGES/card_fronts/thrawne.webp`,
       isVisible: true,
       isVariant: false
     })

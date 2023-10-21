@@ -4,6 +4,7 @@ import styles from "./MainContainer.module.css";
 
 import { generateUniqueKey } from "../../util/functions";
 import { CSSProperties } from "react";
+import { assetServiceUrl } from "../../util/constants";
 
 /**
  * MainContainer(Should be used on all pages with a normal styled background)
@@ -25,7 +26,7 @@ const MainContainer: React.FC<any> = ({ title, description, bgImage, lineArt, ov
 
   /* Set BackgroundImage */
   const bgImageStyle: CSSProperties = {
-    backgroundImage: `url('https://swgu-library.onrender.com/images/BACKGROUNDS/${bgImage}.webp')`
+    backgroundImage: `url('${assetServiceUrl}/IMAGES/backgrounds/${bgImage}.webp')`
   }
   
   /* LineArt preparation */

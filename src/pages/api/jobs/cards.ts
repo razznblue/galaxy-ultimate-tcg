@@ -5,6 +5,7 @@ import LOGGER from '../../../util/logger';
 import { authenticateKey } from '../../../helpers/apiHelper';
 import { CreateCardBody } from '../../../helpers/interfaces';
 import { createCard, updateCard } from '../../../server/controllers/CardController';
+import { assetServiceUrl } from '../../../util/constants';
 
 const NAME_HEADER = 'NAME';
 const JOB_NAME = 'CARDS_PIPELINE'
@@ -57,8 +58,8 @@ const formatAndSave = async (cards: any) => {
       isVariant: card?.variantName !== '' ? 'true' : 'false',
       variantName: card?.variantName || undefined,
       image: card?.variantName !== '' 
-        ? `https://swgu-library.onrender.com/images/CARD_FRONTS/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}-${card?.variantName}.webp`
-        : `https://swgu-library.onrender.com/images/CARD_FRONTS/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
+        ? `${assetServiceUrl}/IMAGES/card_fronts/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}-${card?.variantName}.webp`
+        : `${assetServiceUrl}/IMAGES/card_fronts/${card?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
       visible: card?.visible?.toLowerCase() === 'false' ? 'false' : 'true'
     }
 

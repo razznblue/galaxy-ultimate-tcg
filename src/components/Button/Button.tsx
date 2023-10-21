@@ -3,12 +3,13 @@ import Link from "next/link";
 import { CSSProperties } from "react";
 import Text from "../Text/Text";
 import { playButtonClick } from "../../util/sfx";
+import { assetServiceUrl } from "../../util/constants";
 
 const Button: any = ({ imageType, text, link, position }) => {
   imageType = imageType || 'menu-btn';
   text = text || 'undefined';
 
-  const imgUrl = `https://swgu-library.onrender.com/images/ICONS/${imageType}.webp`;
+  const imgUrl = `${assetServiceUrl}/IMAGES/icons/${imageType}.webp`;
 
   const style: CSSProperties = {
     position: 'relative',

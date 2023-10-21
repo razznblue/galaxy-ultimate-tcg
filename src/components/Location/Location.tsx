@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { assetServiceUrl } from "../../util/constants";
 
 const Location: any = ({ location }) => {
 
-  const unrevealedLocation = 'https://swgu-library.onrender.com/images/LOCATIONS/location-unrevealed.webp';
+  const unrevealedLocation = `${assetServiceUrl}/IMAGES/locations/location-unrevealed.webp`;
   const locationImg = location?.type === 'unrevealed' ? unrevealedLocation : location?.img
   const locationText = location?.text
 

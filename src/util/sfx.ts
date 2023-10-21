@@ -1,10 +1,11 @@
 import { Howl } from 'howler';
+import { assetServiceUrl } from './constants';
 
 const sounds = {
-  BG: "https://swgu-library.onrender.com/audio/AUDIO/Notorious_BIG_Big_Poppa.mp3",
-  POP: "https://swgu-library.onrender.com/audio/AUDIO/pop.wav",
-  GLASS_WOOSH: "https://swgu-library.onrender.com/audio/AUDIO/glass-woosh.wav",
-  ERROR: "https://swgu-library.onrender.com/audio/AUDIO/error.wav"
+  BG: `${assetServiceUrl}/AUDIO/background/Notorious_BIG_Big_Poppa.mp3`,
+  POP: `${assetServiceUrl}/AUDIO/sfx/pop.wav`,
+  GLASS_WOOSH: `${assetServiceUrl}/AUDIO/sfx/glass-woosh.wav`,
+  ERROR: `${assetServiceUrl}/AUDIO/sfx/error.wav`
 }
 
 const SFX = {
