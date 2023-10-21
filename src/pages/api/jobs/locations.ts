@@ -5,6 +5,7 @@ import LOGGER from '../../../util/logger';
 import { authenticateKey } from '../../../helpers/apiHelper';
 import { CreateLocationBody } from '../../../helpers/interfaces';
 import { createLocation, updateLocation } from '../../../server/controllers/LocationController';
+import { assetServiceUrl } from '../../../util/constants';
 
 const HEADER_CHECK = 'ABILITY';
 const JOB_NAME = 'LOCATIONS_PIPELINE';
@@ -47,7 +48,7 @@ const formatAndSave = async (locations: any) => {
       abilityText: location?.ability,
       abilityType: location?.type,
       tags: location?.tags.includes(', ') ? location?.tags.split(', ') : location?.tags === '' ? undefined : [location?.tags],
-      image: `https://swgu-library.onrender.com/images/LOCATIONS/location-${location?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
+      image: `${assetServiceUrl}/IMAGES/locations/location-${location?.name?.trim().toLowerCase().replaceAll(' ', '-')}.webp`,
       visible: location?.visible?.toLowerCase() === 'false' ? 'false' : 'true'
     }
 

@@ -4,6 +4,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Text from "../Text/Text";
 import { motion } from "framer-motion";
 import { playSecondarySound } from "../../util/sfx";
+import { assetServiceUrl } from "../../util/constants";
 
 const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   const {windowWidth, windowHeight} = useWindowDimensions();
@@ -11,7 +12,7 @@ const LittleButton: any = ({ imageDirection, position, text, onClick }) => {
   imageDirection = imageDirection || 'left';
   text = text || 'back';
 
-  const imgUrl = `https://swgu-library.onrender.com/images/ICONS/back-btn.webp`;
+  const imgUrl = `${assetServiceUrl}/IMAGES/icons/back-btn.webp`;
 
   const style: CSSProperties = {
     height: 'auto',

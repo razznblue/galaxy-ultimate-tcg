@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { CSSProperties } from "react";
+import { assetServiceUrl } from "../../util/constants";
 
 const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg, position, customTailwind }) => {
   showAvatar = showAvatar || true;
   avatarName = avatarName || 'Player';
-  avatarImg = avatarImg || 'https://swgu-library.onrender.com/images/BACKGROUNDS/default-profile.png';
+  avatarImg = avatarImg || `${assetServiceUrl}/IMAGES/backgrounds/default-profile.png`;
 
-  const imgUrl = `https://swgu-library.onrender.com/images/ICONS/sci-fi-border-${imageDirection || 'horizontal'}.webp`
+  const imgUrl = `${assetServiceUrl}/IMAGES/icons/sci-fi-border-${imageDirection || 'horizontal'}.webp`
 
   const style: CSSProperties = {
     width: '25%',
@@ -31,7 +32,7 @@ const ProfilePicture: any = ({ imageDirection, showAvatar, avatarName, avatarImg
     bottom: '-20%',
     width: '100%',
     height: '50%',
-    background: `url('https://swgu-library.onrender.com/images/ICONS/avatar-border.webp')`, // Set the background image
+    background: `url('${assetServiceUrl}/IMAGES/icons/avatar-border.webp')`, // Set the background image
     backgroundSize: 'cover',
     display: 'flex',
     justifyContent: 'center',

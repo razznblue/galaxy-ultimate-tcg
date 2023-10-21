@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Header from "../Heading/Heading";
 import { useEffect, useState } from "react";
+import { assetServiceUrl } from "../../util/constants";
 
 const Carousel: any = ({ type, cardStyle, size, position }) => {
   const [activeDeckName, setActiveDeckName] = useState('');
@@ -9,9 +10,9 @@ const Carousel: any = ({ type, cardStyle, size, position }) => {
     setActiveDeckName('RepublicGeos');
   }, [])
 
-  const toggleBtn = "https://swgu-library.onrender.com/images/ICONS/triangle-btn.webp";
-  const deck1 = "https://swgu-library.onrender.com/images/CARD_BACKS/ahsoka-lightsaber.webp";
-  const deck2 = "https://swgu-library.onrender.com/images/CARD_BACKS/swgu-base.webp";
+  const toggleBtn = `${assetServiceUrl}/IMAGES/icons/triangle-btn.webp`
+  const deck1 = `${assetServiceUrl}/IMAGES/card_backs/ahsoka-lightsaber.webp`
+  const deck2 = `${assetServiceUrl}/IMAGES/card_backs/swgu-base.webp`
 
   return (
     <div className={`flex flex-row absolute top-[25%] w-[100%] items-center justify-evenly`}>

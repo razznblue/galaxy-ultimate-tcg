@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { assetServiceUrl } from "../../util/constants";
 
 /**
  * LineArt used in the {@link MainContainer} on the background of all
@@ -7,7 +8,7 @@ import { CSSProperties } from "react";
  * @position - positions the element 
  */
 const LineArt: any = ({ imageType, position }) => {
-  const imgUrl = `https://swgu-library.onrender.com/images/BACKGROUNDS/${imageType}.webp`
+  const imgUrl = `${assetServiceUrl}/IMAGES/backgrounds/${imageType}.webp`
 
   const style: CSSProperties = {
     position: 'absolute',

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { textColor } from "../../styles/theme";
 import styles from './Currency.module.css'
-import Text from "../Text/Text";
+import { assetServiceUrl } from "../../util/constants";
 
 const Currency: any = ({ type, amount }) => {
-  const imgUrl = `https://swgu-library.onrender.com/images/OBJECTS/${type || 'credits'}.webp`
+  const imgUrl = `${assetServiceUrl}/IMAGES/objects/${type || 'credits'}.webp`
 
   return (
     <div className={`${styles.currency}`}>

@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { assetServiceUrl } from '../util/constants'
 
 class MyDocument extends Document {
   render() {
@@ -8,7 +9,7 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon.png"></link>
           <meta name="theme-color" content="#fff" />
-          <link rel="icon" href="https://swgu-library.onrender.com/images/ICONS/favicon.ico" />
+          <link rel="icon" href={`${assetServiceUrl}/IMAGES/icons/favicon.ico`} />
         </Head>
         <body>
           <Main />
